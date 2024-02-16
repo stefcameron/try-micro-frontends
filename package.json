@@ -11,7 +11,7 @@
     "build": "pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" build",
     "ci:build": "pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" ci:build",
     "ci:lint": "pnpm fmt:check && pnpm lint",
-    "ci:test": "pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" --if-present ci:test",
+    "ci:test": "pnpm test:coverage && pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" --if-present ci:test",
     "fmt": "prettier --write \"{*,apps/**/*,libraries/**/*,tools/**/*}.+(js|mjs|jsx|css|yml|json)\"",
     "fmt:check": "prettier --check \"{*,apps/**/*,libraries/**/*,tools/**/*}.+(js|mjs|jsx|css|yml|json)\"",
     "lint": "eslint \"{*,apps/**/*,libraries/**/*,tools/**/*}.+(js|mjs|jsx)\"",
