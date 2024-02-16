@@ -1,5 +1,5 @@
 //
-// WEBPACK build configuration
+// APP1 WEBPACK build configuration
 //
 // ENV:
 //
@@ -57,7 +57,7 @@ const getOpenConfig = function () {
 };
 
 const loadBabelConfig = function () {
-  const filepath = path.resolve(__dirname, './babel.config.js');
+  const filepath = path.resolve(__dirname, '../../babel.config.js');
 
   // NOTE: we must use inline `require()` statements since the Babel config
   //  files are JS files; we need to not only read them, but evaluate them

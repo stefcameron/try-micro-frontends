@@ -1,10 +1,26 @@
 # Try Micro Frontends
 
-An exploration of micro-frontend application architecture in a PNPM-based monorepo context.
+An exploration of micro-frontend application architecture in a PNPM-based monorepo context, starting with an existing, not necessarily ideal, monorepo layout.
+
+The focus is on:
+
+- how PNPM manages the workspace;
+- how to tweak the monorepo layout to make it work when transforming `//apps/app1` into a set of sub-packages; and
+- how the various packages can be statically or dynamically imported to be composed into "applications".
+
+> ❗️ The focus is __not on__ proper monorepo layout, tooling, deduplication of build configs, etc.
+
+## Workspace
+
+- Packages MUST have `build` and `ci:build` scripts. They MUST yield the prod build, one under local conditions and the other under CI.
+- Packages MAY have a `ci:test` script. It SHOULD perform any additional test-related tasks that need to run under CI.
+- For the purposes of this POC, it's not possible to format/lint code in an individual package; only from the root.
 
 ---
 
-> Based on [React App Template](https://github.com/stefcameron/react-app-template).
+## Packages
+
+Based on [React App Template](https://github.com/stefcameron/react-app-template).
 
 A "create react app"-style repo with a stack that I find works well, is easy to
 understand, and doesn't need to be ejected in order to get into its guts
@@ -26,28 +42,28 @@ and figure out why it isn't working if something comes up.
 - Formatting: [Prettier](https://prettier.io/)
 - Bundling: [Webpack](https://webpack.js.org/)
 
-## Running
+### Running
 
 Using the latest stable version of Node (v20) and NPM (v9.6)...
 
 ```bash
-$ npm install
+$ pnpm install
 # installs all dependencies
-$ npm start
+$ pnpm start
 # opens a browser to localhost:3000
-# set PORT=XXXX env to run on a different port
+# set PORT=XXXX in env to run on a different port
 
-$ npm fmt
+$ pnpm fmt
 # formats the code using Prettier
-$ npm build
+$ pnpm build
 # builds the production bundle
-$ npm build:dev
+$ pnpm build:dev
 # builds the development bundle
 ```
 
 > 💬 If your browser doesn't open, please open it manually to `localhost:3000`
 
-## Testing
+### Testing
 
 ```bash
 $ npm test
@@ -60,9 +76,9 @@ $ npm run fmt:check
 # runs Prettier in verification mode only
 ```
 
-## Styles
+### Styles
 
 Pure CSS, just `import './MyComponent.styles.css'` in your component's module
 the styles will get loaded whenever/if ever the module is loaded at runtime.
 
-See `./src/components/App/App.js` for an example.
+See `./apps/app1/src/components/App/App.js` for an example.

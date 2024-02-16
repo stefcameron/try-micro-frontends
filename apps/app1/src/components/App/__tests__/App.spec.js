@@ -4,7 +4,7 @@ import { App } from '../App';
 describe('/components/App', () => {
   it('renders the app title', () => {
     render(<App />);
-    expect(screen.getByText('React App')).toBeInTheDocument();
+    expect(screen.getByText('React App 1')).toBeInTheDocument();
   });
 
   it('is accessible', async () => {

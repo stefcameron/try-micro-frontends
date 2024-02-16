@@ -39,7 +39,7 @@ const mkConfig = function () {
 
     // NOTE: paths are relative from where Jest is run
     collectCoverageFrom: [
-      'src/**/[^.]*.{js,jsx}', // ignore .files like .eslintrc.js with `/[^.]` in this glob pattern
+      '{apps/*,libraries/*}/src/**/[^.]*.{js,jsx}', // ignore .files like .eslintrc.js with `/[^.]` in this glob pattern
     ],
     coverageDirectory: './coverage',
 
@@ -50,7 +50,7 @@ const mkConfig = function () {
       //  a __test__ directory at any depth within the base path
       `${path.resolve(
         __dirname
-      )}/src/**/__tests__/**/?(*.)+(spec|test).{js,jsx}`,
+      )}/{apps/*,libraries/*}/src/**/__tests__/**/?(*.)+(spec|test).{js,jsx}`,
     ],
 
     // NOTE: to truly ignore paths, we have to ignore them both for tests and

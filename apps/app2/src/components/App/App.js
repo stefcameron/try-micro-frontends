@@ -3,8 +3,7 @@ import './App.styles.css';
 export const App = function () {
   return (
     <div className="app">
-      <h1>React App</h1>
-      <h2>Template</h2>
+      <h1>React App 2</h1>
     </div>
   );
 };
