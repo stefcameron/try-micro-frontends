@@ -213,13 +213,17 @@ const jestSettings = {
   },
 };
 
+// where packages are located in the repo; does NOT end with a slash
+const pkgGlobs = ['apps/*', 'libraries/*'];
+
 module.exports = {
   root: true,
   overrides: [
     // project JavaScript files (tooling, etc.)
     {
+      // traditional CJS/require scripts
       files: ['**/*.js'],
-      excludedFiles: ['src/**/*.*'],
+      excludedFiles: pkgGlobs.map((glob) => `${glob}/src/**/*.*`),
       extends: jsExtends,
       parserOptions: {
         ...parserOptions,
@@ -232,8 +236,9 @@ module.exports = {
       },
     },
     {
+      // modern ESM/import scripts
       files: ['**/*.mjs'],
-      excludedFiles: ['src/**/*.*'],
+      excludedFiles: pkgGlobs.map((glob) => `${glob}/src/**/*.*`),
       extends: jsExtends,
       parserOptions,
       env,
@@ -245,7 +250,7 @@ module.exports = {
 
     // source files
     {
-      files: ['src/**/*.{js,jsx}'],
+      files: pkgGlobs.map((glob) => `${glob}/src/**/*.{js,jsx}`),
 
       // @see https://www.npmjs.com/package/@babel/eslint-plugin
       //  currently, none of the rules overridden in the plugin are enforced here
@@ -271,7 +276,9 @@ module.exports = {
       //  extension; and just test.<ext> or spec.<ext>; as long as the file is inside
       //  a __test__ directory at any depth within the base path
       files: [
-        'src/**/__tests__/**/?(*.)+(spec|test).{js,jsx}',
+        ...pkgGlobs.map(
+          (glob) => `${glob}/src/**/__tests__/**/?(*.)+(spec|test).{js,jsx}`
+        ),
         'tools/tests/**/*.js',
       ],
 
