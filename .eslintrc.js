@@ -279,7 +279,7 @@ module.exports = {
         ...pkgGlobs.map(
           (glob) => `${glob}/src/**/__tests__/**/?(*.)+(spec|test).{js,jsx}`
         ),
-        'tools/tests/**/*.js',
+        'tools/test/**/*.js',
       ],
 
       // @see https://www.npmjs.com/package/@babel/eslint-plugin
