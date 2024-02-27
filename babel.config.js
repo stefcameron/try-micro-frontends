@@ -17,6 +17,7 @@ const baseConfig = function () {
   return {
     presets: [
       // @see https://babeljs.io/docs/en/babel-preset-env#options
+      // @see https://github.com/browserslist/browserslist#full-list
       ['@babel/preset-env', { targets: 'defaults' }],
 
       // @see https://babeljs.io/docs/en/babel-preset-react

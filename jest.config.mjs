@@ -31,10 +31,14 @@ const mkConfig = function () {
       //  is ignored by Jest by default) that are shipped as ES6-only and need
       //  to be transpiled via 'babel-jest' configured in the 'transform' option
       // @see https://github.com/facebook/jest/issues/9292#issuecomment-569673251
-      'node_modules/(?!(' +
-        // 'first-lib' +
+      // NOTE: `pnpm` uses different node_modules subpaths than `npm` does, typically in the
+      //  form of `node_modules/.pnpm/package-a@x.x.x/node_modules/package-a/`, so we need
+      //  a slightly different pattern than the typically `npm`-based one
+      // @see https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
+      'node_modules/.pnpm/(?!(' +
+        'dayjs' +
         // '|other-lib' +
-        ')/)',
+        ')@)',
     ],
 
     // NOTE: paths are relative from where Jest is run
