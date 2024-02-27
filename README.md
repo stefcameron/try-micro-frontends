@@ -1,3 +1,5 @@
+[![CI](https://github.com/stefcameron/try-micro-frontends/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stefcameron/try-micro-frontends/actions/workflows/ci.yml) [![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE)
+
 # Try Micro Frontends
 
 An exploration of micro-frontend application architecture in a PNPM-based monorepo context, starting with an existing, not necessarily ideal, monorepo layout.
