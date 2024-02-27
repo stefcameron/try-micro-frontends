@@ -1,6 +1,8 @@
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
+import './TextInput.css';
+
 const displayName = 'TextInput';
 const compClassName = `design-${displayName.toLowerCase()}`;
 let nextId = 1;

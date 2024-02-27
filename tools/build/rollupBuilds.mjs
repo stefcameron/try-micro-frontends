@@ -12,6 +12,7 @@ import {
 } from '@rollup/plugin-babel';
 import replacePlugin from '@rollup/plugin-replace';
 import { terser as terserPlugin } from 'rollup-plugin-terser';
+import cssPlugin from 'rollup-plugin-import-css';
 
 import { loadBabelConfig, loadJsonFile } from './buildUtil.mjs';
 import {
@@ -41,7 +42,7 @@ const getOutputFilepath = function ({ format, isDev } = {}) {
     throw new Error(`A valid output format is required, format=${format}`);
   }
 
-  return `${DIR_DIST}/index.${format.toLowerCase()}${isDev === true ? `.${OUTPUT_DEV}` : ''}.js`;
+  return `${DIR_DIST}/index.${format === RU_FORMAT_ESM ? 'esm' : format.toLowerCase()}${isDev === true ? `.${OUTPUT_DEV}` : ''}.js`;
 };
 
 // base Babel configuration
@@ -149,6 +150,7 @@ const getBaseConfig = function (
       cjsPlugin({
         include: 'node_modules/**',
       }),
+      cssPlugin({ inject: true }),
     ],
     watch: {
       include: `${DIR_SRC}/**`,

@@ -15,3 +15,10 @@
   color: lightblue;
   font-family: var(--app-font-family-monospace);
 }
+
+.app > * {
+  margin-bottom: 12px;
+}
+.app > *:last-child {
+  margin-bottom: 0;
+}

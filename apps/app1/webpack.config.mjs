@@ -3,7 +3,7 @@
 //
 // ENV:
 //
-// - ST_PORT (number): If specified, the dev server will run on the specified port;
+// - PORT (number): If specified, the dev server will run on the specified port;
 //     default is 3000.
 //
 

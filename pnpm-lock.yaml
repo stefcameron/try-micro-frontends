@@ -44,6 +44,7 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       rollup: ^4.12.0
+      rollup-plugin-import-css: ^3.5.0
       rollup-plugin-terser: ^7.0.2
       style-loader: ^3.3.4
       typescript: ^5.3.3
@@ -91,6 +92,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rollup: 4.12.0
+      rollup-plugin-import-css: 3.5.0_rollup@4.12.0
       rollup-plugin-terser: 7.0.2_rollup@4.12.0
       style-loader: 3.3.4_webpack@5.90.1
       typescript: 5.3.3
@@ -101,6 +103,8 @@ importers:
   apps/app1:
     specifiers:
       '@babel/runtime': ^7.23.9
+      '@try-micro-frontends/design': ^1.0.0
+      '@try-micro-frontends/util': ^1.0.0
       classnames: ^2.5.1
       prop-types: ^15.8.1
       react: ^18.2.0
@@ -108,6 +112,8 @@ importers:
       react-helmet: ^6.1.0
     devDependencies:
       '@babel/runtime': 7.23.9
+      '@try-micro-frontends/design': link:../../libraries/design
+      '@try-micro-frontends/util': link:../../libraries/util
       classnames: 2.5.1
       prop-types: 15.8.1
       react: 18.2.0
@@ -117,6 +123,7 @@ importers:
   apps/app2:
     specifiers:
       '@babel/runtime': ^7.23.9
+      '@try-micro-frontends/design': ^1.0.0
       classnames: ^2.5.1
       prop-types: ^15.8.1
       react: ^18.2.0
@@ -124,6 +131,7 @@ importers:
       react-helmet: ^6.1.0
     devDependencies:
       '@babel/runtime': 7.23.9
+      '@try-micro-frontends/design': link:../../libraries/design
       classnames: 2.5.1
       prop-types: 15.8.1
       react: 18.2.0
@@ -7101,6 +7109,16 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
+    dev: true
+
+  /rollup-plugin-import-css/3.5.0_rollup@4.12.0:
+    resolution: {integrity: sha512-JOVow6n00qt2C/NnsqPmIjFOfxIAudwWqC5SaC84CodMGiMFaP1gPAdgnJ8g8hcG+P85TCYp2kI98grYCEt5pg==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      rollup: ^2.x.x || ^3.x.x || ^4.x.x
+    dependencies:
+      '@rollup/pluginutils': 5.1.0_rollup@4.12.0
+      rollup: 4.12.0
     dev: true
 
   /rollup-plugin-terser/7.0.2_rollup@4.12.0:

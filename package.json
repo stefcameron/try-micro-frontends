@@ -8,8 +8,10 @@
     "pnpm": "7"
   },
   "scripts": {
-    "build": "pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" build",
-    "ci:build": "pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" ci:build",
+    "build": "pnpm build:libs && pnpm build:apps",
+    "build:apps": "pnpm --filter \"{apps/*}\" build",
+    "build:libs": "pnpm --filter \"{libraries/*}\" build",
+    "ci:build": "pnpm --filter \"{libraries/*}\" ci:build && pnpm --filter \"{apps/*}\" ci:build",
     "ci:lint": "pnpm fmt:check && pnpm lint",
     "ci:test": "pnpm test:coverage && pnpm --filter \"{apps/*}\" --filter \"{libraries/*}\" --if-present ci:test",
     "fmt": "prettier --write \"{*,apps/**/*,libraries/**/*,tools/**/*}.+(js|mjs|jsx|css|yml|json)\"",
@@ -62,6 +64,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^4.12.0",
+    "rollup-plugin-import-css": "^3.5.0",
     "rollup-plugin-terser": "^7.0.2",
     "style-loader": "^3.3.4",
     "typescript": "^5.3.3",

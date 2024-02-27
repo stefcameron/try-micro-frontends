@@ -1,3 +1,3 @@
-export { Button } from './Button';
-export { Checkbox } from './Checkbox';
-export { TextInput } from './TextInput';
+export { Button } from './Button/Button';
+export { Checkbox } from './Checkbox/Checkbox';
+export { TextInput } from './TextInput/TextInput';
