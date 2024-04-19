@@ -34,11 +34,13 @@ jobs:
       - name: Install packages
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm run ci:lint
-
+      # build first because this produces .d.ts files that `tsc` will need when
+      #  linting types in the `lint` step
       - name: Build
         run: pnpm run ci:build
+
+      - name: Lint
+        run: pnpm run ci:lint
 
       - name: Test
         run: pnpm run ci:test

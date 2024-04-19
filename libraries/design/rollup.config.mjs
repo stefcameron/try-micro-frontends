@@ -6,4 +6,5 @@ import * as builds from '../../tools/build/rollupBuilds.mjs';
 
 export default [
   builds.getEsmConfig(), // Dev and Prod combined
+  builds.getEsmDtsConfig(), // type definitions
 ];

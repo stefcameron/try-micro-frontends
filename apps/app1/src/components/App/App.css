@@ -22,3 +22,7 @@
 .app > *:last-child {
   margin-bottom: 0;
 }
+
+.app > section.app__today-date {
+  height: 60px;
+}

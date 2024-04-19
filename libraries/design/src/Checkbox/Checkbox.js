@@ -25,7 +25,6 @@ export const Checkbox = ({
     <div
       data-component={displayName}
       className={classnames(compClassName, className)}
-      style={{ display: 'flex', alignItems: 'center' }}
     >
       <input
         type="checkbox"

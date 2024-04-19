@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "description": "Design library",
   "exports": {
-    ".": "./dist/index.esm.js"
+    "types": "./dist/index.d.ts",
+    "default": {
+      "import": "./dist/index.esm.js"
+    }
   },
   "scripts": {
     "build": "rollup -c rollup.config.mjs",

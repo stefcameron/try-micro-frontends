@@ -16,11 +16,6 @@ export const Button = ({ className, id, label, onClick }) => {
     <div
       data-component={displayName}
       className={classnames(compClassName, className)}
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
     >
       <button id={ctrlId} onClick={handleClick}>
         {label}

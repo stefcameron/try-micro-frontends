@@ -2,8 +2,8 @@
 // Generates a Jest Configuration
 //
 
-import path from 'path';
-import url from 'url';
+import path from 'node:path';
+import url from 'node:url';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
@@ -23,6 +23,7 @@ const mkConfig = function () {
     },
     transform: {
       '^.+\\.jsx?$': 'babel-jest',
+      '^.+\\.tsx?$': 'ts-jest',
       '.+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2|otf)$':
         'jest-transform-stub',
     },
@@ -43,7 +44,7 @@ const mkConfig = function () {
 
     // NOTE: paths are relative from where Jest is run
     collectCoverageFrom: [
-      '{apps/*,libraries/*}/src/**/[^.]*.{js,jsx}', // ignore .files like .eslintrc.js with `/[^.]` in this glob pattern
+      '{apps/*,libraries/*}/src/**/[^.]*.{js,jsx,ts,tsx}', // ignore .files like .eslintrc.js with `/[^.]` in this glob pattern
     ],
     coverageDirectory: './coverage',
 
@@ -54,7 +55,7 @@ const mkConfig = function () {
       //  a __test__ directory at any depth within the base path
       `${path.resolve(
         __dirname
-      )}/{apps/*,libraries/*}/src/**/__tests__/**/?(*.)+(spec|test).{js,jsx}`,
+      )}/{apps/*,libraries/*}/src/**/__tests__/**/?(*.)+(spec|test).{js,jsx,ts,tsx}`,
     ],
 
     // NOTE: to truly ignore paths, we have to ignore them both for tests and
@@ -80,6 +81,10 @@ const mkConfig = function () {
     snapshotFormat: {
       escapeString: true,
       printBasicPrototype: true,
+    },
+
+    moduleNameMapper: {
+      '^@try-micro-frontends/(.+)$': '<rootDir>/libraries/$1/src',
     },
   };
 };

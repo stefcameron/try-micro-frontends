@@ -2,6 +2,7 @@
 // Rollup Build Configurations
 //
 
+import fs from 'fs';
 import path from 'path';
 import jsonPlugin from '@rollup/plugin-json';
 import resolvePlugin from '@rollup/plugin-node-resolve';
@@ -13,8 +14,14 @@ import {
 import replacePlugin from '@rollup/plugin-replace';
 import { terser as terserPlugin } from 'rollup-plugin-terser';
 import cssPlugin from 'rollup-plugin-import-css';
+import tsPlugin from '@rollup/plugin-typescript';
+import { dts as dtsPlugin } from 'rollup-plugin-dts';
 
-import { loadBabelConfig, loadJsonFile } from './buildUtil.mjs';
+import {
+  getModuleDirname,
+  loadBabelConfig,
+  loadJsonFile,
+} from './buildUtil.mjs';
 import {
   RU_FORMAT_CJS,
   RU_FORMAT_ESM,
@@ -24,6 +31,7 @@ import {
   DIR_DIST,
 } from './rollupUtil.mjs';
 
+const __dirname = getModuleDirname(import.meta);
 const pkg = loadJsonFile(path.resolve('./package.json'));
 
 const banner = `/*!
@@ -33,13 +41,18 @@ const banner = `/*!
 
 // Determines the primary/default export path.
 // - format {string}: (REQUIRED) set to Rollup build format
+// - isDts {boolean}: Optional true to indicate it's TypeScript type definitions
 // - isDev {boolean}: Optional true to indicate a Dev build, or false to indicate a Prod build
-const getOutputFilepath = function ({ format, isDev } = {}) {
+const getOutputFilepath = function ({ format, isDts, isDev } = {}) {
   if (
     !format ||
     ![RU_FORMAT_CJS, RU_FORMAT_ESM, RU_FORMAT_UMD].includes(format)
   ) {
     throw new Error(`A valid output format is required, format=${format}`);
+  }
+
+  if (isDts) {
+    return `${DIR_DIST}/index.d.ts`;
   }
 
   return `${DIR_DIST}/index.${format === RU_FORMAT_ESM ? 'esm' : format.toLowerCase()}${isDev === true ? `.${OUTPUT_DEV}` : ''}.js`;
@@ -125,8 +138,17 @@ const getBaseConfig = function (
   // else, for CJS and ESM, `process.env.NODE_ENV` stays in the code for a combined
   //  Dev/Prod build that expects the consumer to define the global
 
+  let input; // relative to exe dir
+  if (fs.existsSync(`${DIR_SRC}/index.js`)) {
+    input = `${DIR_SRC}/index.js`;
+  } else if (fs.existsSync(`${DIR_SRC}/index.ts`)) {
+    input = `${DIR_SRC}/index.ts`;
+  } else {
+    throw new Error('Failed to find index.js or index.ts entry point');
+  }
+
   const config = {
-    input: `${DIR_SRC}/index.js`,
+    input,
     output: null,
     external(moduleName) {
       // NOTE: if we just provided an array of module names, Rollup would do
@@ -149,6 +171,9 @@ const getBaseConfig = function (
       resolvePlugin(),
       cjsPlugin({
         include: 'node_modules/**',
+      }),
+      tsPlugin({
+        tsconfig: path.resolve(__dirname, '../../tsconfig.json'),
       }),
       cssPlugin({ inject: true }),
     ],
@@ -299,6 +324,22 @@ export const getEsmConfig = function () {
   config.output = {
     ...baseOutput(),
     file: getOutputFilepath({ format }),
+    format,
+  };
+
+  return config;
+};
+
+// ESM (ES6+) Type Definition (.dts) build config
+export const getEsmDtsConfig = function () {
+  const format = RU_FORMAT_ESM;
+  const config = getBaseConfig({ format });
+
+  config.plugins.push(dtsPlugin());
+
+  config.output = {
+    ...baseOutput(),
+    file: getOutputFilepath({ format, isDts: true }),
     format,
   };
 

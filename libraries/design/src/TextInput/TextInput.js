@@ -18,7 +18,6 @@ export const TextInput = ({ className, id, label, onChange, value }) => {
     <div
       data-component={displayName}
       className={classnames(compClassName, className)}
-      style={{ display: 'flex', alignItems: 'center' }}
     >
       <label htmlFor={ctrlId}>{label}</label>
       <input
