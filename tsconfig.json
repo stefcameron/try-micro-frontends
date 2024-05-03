@@ -4,6 +4,11 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./tools/test/globals.d.ts",
+      "./apps/globals.d.ts"
+    ],
     "moduleResolution": "Bundler",
     "strict": true,
     "sourceMap": true,

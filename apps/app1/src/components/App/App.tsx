@@ -1,30 +1,53 @@
-import { ChangeEvent, useState } from 'react';
-import { Checkbox } from '@try-micro-frontends/design';
+import classNames from 'classnames';
 import * as util from '@try-micro-frontends/util';
+import { Films } from '../Films/Films';
 
 import './App.css';
 
-interface CheckboxChangeHandler {
-  (event: ChangeEvent<HTMLInputElement>, info: { newValue: boolean }): void;
-}
-
 export const App = function (): JSX.Element {
-  const [checked, setChecked] = useState(false);
-
-  const handleChange: CheckboxChangeHandler = (event, { newValue }) =>
-    setChecked(newValue);
-
+  // TODO: use central redux state to control which section is active
+  // TODO: use route to render active section
   return (
     <div className="app">
-      <h1>React App 1</h1>
-      <section className="app__today-date">
-        <Checkbox
-          label="Show today's date"
-          value={checked}
-          onChange={handleChange}
-        />
-        {checked ? <p>{util.date.getToday()}</p> : null}
+      <header>
+        <h1>App1 - Star Wars Stats</h1>
+        <nav>
+          <ul>
+            <li
+              className={classNames(true && 'app__header__nav__item--active')}
+            >
+              <a href="#" onClick={(event) => event.preventDefault()}>
+                🎬 Films
+              </a>
+            </li>
+            <li
+              className={classNames(false && 'app__header__nav__item--active')}
+            >
+              <a href="#" onClick={(event) => event.preventDefault()}>
+                👨‍🚀 People
+              </a>
+            </li>
+            <li
+              className={classNames(false && 'app__header__nav__item--active')}
+            >
+              <a href="#" onClick={(event) => event.preventDefault()}>
+                🛸 Starships
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section>
+        <Films />
       </section>
+      <footer>
+        <p>
+          {util.date.getToday()} | Data from{' '}
+          <a href="https://swapi.dev/" target="_blank" rel="noreferrer">
+            SWAPI.dev
+          </a>
+        </p>
+      </footer>
     </div>
   );
 };

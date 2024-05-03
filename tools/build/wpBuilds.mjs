@@ -12,6 +12,7 @@ import path from 'path';
 import url from 'url';
 import process from 'process';
 import { createRequire } from 'module';
+import webpack from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { cloneDeep } from 'lodash-es';
@@ -192,6 +193,9 @@ export const mkConfig = function () {
     //  loaders that are executed in REVERSE order)
     //  @see https://stackoverflow.com/questions/41470771/webpack-does-the-order-of-plugins-matter
     plugins: [
+      new webpack.DefinePlugin({
+        WP_PORT: JSON.stringify(port),
+      }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: indexPath,
@@ -224,6 +228,20 @@ export const mkConfig = function () {
           runtimeErrors: false,
         },
       },
+      proxy: [
+        {
+          context: [
+            '/api/films',
+            '/api/people',
+            '/api/species',
+            '/api/planets',
+            '/api/starships',
+            '/api/vehicles',
+          ],
+          target: 'https://swapi.dev',
+          secure: false,
+        },
+      ],
     },
   };
 };

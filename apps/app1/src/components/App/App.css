@@ -1,28 +1,90 @@
 .app {
+  --app-nav-tab-color: #555;
+  --app-margin-vertical: 16px;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100vw;
-  height: 25vh;
+  min-height: calc(100vh - var(--app-margin-vertical) * 2);
+  margin-top: var(--app-margin-vertical);
 }
-
-.app > h1 {
-  color: lightslategray;
-}
-
-.app > h2 {
-  color: lightblue;
-  font-family: var(--app-font-family-monospace);
-}
-
 .app > * {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .app > *:last-child {
   margin-bottom: 0;
 }
 
-.app > section.app__today-date {
-  height: 60px;
+.app > header {
+  flex: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+.app > header > h1 {
+  margin-bottom: 24px;
+}
+.app > header > nav {
+  flex: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-bottom: 4px solid var(--app-nav-tab-color);
+}
+.app > header > nav > ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+.app > header > nav > ul > li {
+  padding: 4px 12px;
+  margin-right: 12px;
+  font-size: var(--theme-font-size-h2);
+  cursor: pointer;
+}
+.app > header > nav > ul > li:last-child {
+  margin-right: 0;
+}
+.app > header > nav > ul > li.app__header__nav__item--active {
+  color: white;
+  background-color: var(--app-nav-tab-color);
+}
+.app > header > nav > ul > li > a[href] {
+  color: var(--app-nav-tab-color);
+}
+.app > header > nav > ul > li.app__header__nav__item--active > a[href] {
+  color: white;
+}
+
+.app > section {
+  flex: 1; /* with container `flex-direction: column`, grow/shrink vertically as necessary */
+
+  display: flex;
+  overflow: auto;
+}
+
+.app > footer {
+  flex: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically centered */
+  align-items: center; /* horizontally centered */
+}
+.app > footer > * {
+  margin-bottom: 12px;
+}
+.app > footer > *:last-child {
+  margin-bottom: 0;
+}
+.app > footer > p {
+  font-size: var(--theme-font-size-small);
 }

@@ -1,0 +1,16 @@
+.films {
+  flex: 1;
+
+  display: flex;
+}
+
+.films__listing {
+  list-style: none;
+}
+
+.films__listing__film {
+  margin-bottom: 8px;
+}
+.films__listing__film:last-child {
+  margin-bottom: 0;
+}

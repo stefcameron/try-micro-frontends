@@ -1,31 +1,31 @@
 {
   "private": true,
-  "name": "@try-micro-frontends/app1",
+  "name": "@try-micro-frontends/api",
   "version": "1.0.0",
-  "description": "Application 1",
+  "description": "API library",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": {
+      "import": "./dist/index.esm.js"
+    }
+  },
   "scripts": {
-    "build": "webpack",
-    "build:dev": "NODE_ENV=development webpack",
+    "build": "rollup -c rollup.config.mjs",
     "ci:build": "pnpm build",
     "fmt": "cd ../..; pnpm fmt",
     "fmt:check": "cd ../..; pnpm fmt:check",
     "lint": "cd ../..; pnpm lint",
-    "start": "NODE_ENV=development webpack-dev-server",
     "test:coverage": "jest --config=\"../../jest.config.mjs\" --coverage  --testPathPattern=\"$(pwd)\"",
     "test:unit": "jest --config=\"../../jest.config.mjs\" --testPathPattern=\"$(pwd)\"",
     "test": "npm run build && npm run test:coverage"
   },
   "author": "Stefan Cameron",
   "license": "MIT",
+  "peerDependencies": {
+    "@babel/runtime": "^7.23.9"
+  },
+  "dependencies": {},
   "devDependencies": {
-    "@babel/runtime": "^7.23.9",
-    "@try-micro-frontends/api": "^1.0.0",
-    "@try-micro-frontends/design": "^1.0.0",
-    "@try-micro-frontends/util": "^1.0.0",
-    "classnames": "^2.5.1",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0"
+    "@babel/runtime": "^7.23.9"
   }
 }

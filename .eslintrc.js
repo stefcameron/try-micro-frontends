@@ -42,6 +42,15 @@ const jestEnv = {
   'jest/globals': true,
 };
 
+// globals injected/processed by Webpack's `DefinePlugin`
+const webpackGlobals = {
+  /**
+   * __[Webpack Injected]__
+   * Dev server port.
+   */
+  WP_PORT: 'readonly',
+};
+
 // for all JavaScript files
 const jsExtends = [
   'eslint:recommended',
@@ -354,6 +363,9 @@ module.exports = {
         },
       },
       env: browserEnv,
+      globals: {
+        ...webpackGlobals,
+      },
       rules: {
         ...jsRules,
         ...reactRules,
@@ -363,7 +375,10 @@ module.exports = {
 
     // TypeScript source files (plain TS and React-based TSX)
     {
-      files: pkgGlobs.map((glob) => `${glob}/src/**/*.ts`),
+      files: [
+        ...pkgGlobs.map((glob) => `${glob}/src/**/*.ts`),
+        'apps/*.ts', // global declarations
+      ],
 
       // @see https://www.npmjs.com/package/@babel/eslint-plugin
       //  currently, none of the rules overridden in the plugin are enforced here
@@ -373,6 +388,9 @@ module.exports = {
       parser: '@typescript-eslint/parser',
       parserOptions: typedParserOptions,
       env: browserEnv,
+      globals: {
+        ...webpackGlobals,
+      },
       rules: {
         ...jsRules,
         ...tsRules,
@@ -395,6 +413,9 @@ module.exports = {
         },
       },
       env: browserEnv,
+      globals: {
+        ...webpackGlobals,
+      },
       rules: {
         ...jsRules,
         ...tsRules,
