@@ -18,6 +18,10 @@ The focus is on:
 - Packages MAY have a `ci:test` script. It SHOULD perform any additional test-related tasks that need to run under CI.
 - For the purposes of this POC, it's not possible to format/lint code in an individual package; only from the root.
 
+## Dependencies
+
+- `redux` and `react-redux` versions are (very) old because I need to compare apples to apples between this POC and the actual app that would be re-architected.
+
 ---
 
 ## Packages
@@ -84,4 +88,4 @@ $ npm run fmt:check
 
 Pure CSS: Just `import './MyComponent.css'` in your component's module. The styles will get loaded when/if ever the module is loaded at runtime.
 
-See `./apps/app1/src/components/App/App.js` for an example.
+See `./apps/app1/src/components/App/App.tsx` for an example.
