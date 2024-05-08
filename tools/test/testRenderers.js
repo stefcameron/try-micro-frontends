@@ -14,16 +14,13 @@ const AppProviders = function ({ children }) {
 };
 
 AppProviders.propTypes = {
-  children: propTypes.oneOfType([
-    propTypes.node,
-    propTypes.arrayOf(propTypes.node),
-  ]),
+  children: propTypes.node,
 };
 
 // normal render without a custom wrapper
 export const renderRaw = (ui, options) => render(ui, options);
 
-// App render with all its required providers
+// render App with all its required providers
 export const renderApp = (ui, options) =>
   renderRaw(ui, {
     wrapper: AppProviders,
